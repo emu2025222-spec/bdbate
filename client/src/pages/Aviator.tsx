@@ -141,12 +141,6 @@ export default function Aviator() {
   const [roundNumber, setRoundNumber] =
     useState<number | null>(null);
 
-  const [roundId, setRoundId] =
-    useState<string | null>(null);
-
-  const [startedAt, setStartedAt] =
-    useState<string | null>(null);
-
   const [history, setHistory] =
     useState<HistoryItem[]>([]);
 
@@ -503,16 +497,10 @@ export default function Aviator() {
               "WAITING"
             );
 
-            setRoundId(null);
-
             currentRoundIdRef.current =
               null;
 
             setRoundNumber(
-              null
-            );
-
-            setStartedAt(
               null
             );
 
@@ -595,18 +583,10 @@ export default function Aviator() {
           startedAtRef.current =
             round.startedAt;
 
-          setRoundId(
-            resolvedRoundId
-          );
-
           setRoundNumber(
             Number(
               round.roundNumber
             )
-          );
-
-          setStartedAt(
-            round.startedAt
           );
 
           statusRef.current =
@@ -1270,15 +1250,7 @@ export default function Aviator() {
         ) {
           startedAtRef.current =
             nextRound.startedAt;
-
-          setStartedAt(
-            nextRound.startedAt
-          );
         }
-
-        setRoundId(
-          nextRoundId
-        );
 
         if (
           Number.isFinite(

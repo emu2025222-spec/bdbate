@@ -15,6 +15,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 interface AdminSidebarProps {
   mobile?: boolean;
+  open?: boolean;
   onClose?: () => void;
 }
 
@@ -53,6 +54,7 @@ const menuItems = [
 
 export default function AdminSidebar({
   mobile = false,
+  open = true,
   onClose,
 }: AdminSidebarProps) {
   const navigate = useNavigate();
@@ -71,10 +73,29 @@ export default function AdminSidebar({
       replace: true,
     });
 
-    if (onClose) {
-      onClose();
-    }
+    onClose?.();
   };
+
+  if (!open) {
+    return (
+      <aside className="flex h-full w-[72px] flex-col border-r border-white/10 bg-[#081421]">
+        <div className="flex h-[76px] items-center justify-center border-b border-white/10">
+          <button
+            type="button"
+            onClick={() => onClose?.()}
+            className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-400 transition hover:bg-cyan-500/20"
+            aria-label="Open menu"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+        </div>
+
+        <div className="flex flex-1 items-center justify-center">
+          <ShieldCheck className="h-5 w-5 text-slate-500" />
+        </div>
+      </aside>
+    );
+  }
 
   return (
     <aside
